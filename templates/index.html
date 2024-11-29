@@ -6,32 +6,63 @@
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-     <!-- Icons -->
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Animate CSS -->
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <title>CLIMATE_APP_Fátima_Zevallos</title>
 </head>
 <body style="background-color: rgba(173, 216, 230, 0.281);">
-    <div class="container"> 
-    <br>
-    <br>
-    <h1 class="animate__animated animate__rubberBand" style="text-align:center;">
-         MR_WEATHER
-   </h1>
-
-   <form style="text-align:center;">
-    <br>
-        <div class="input-group input-group-sm mb-3">
-            <input type="text" class="form-control" placeholder="País, Estado, Ciudad a consultar:">
-        </div>
-            <button type="button" class="btn btn-secondary"><i class="bi bi-snow2"></i>  Consultar</button>
-    </form>
+    <!-- Botón para ir a la ruta del CV -->
+    <div class="d-flex justify-content-end p-3">
+        <a href="/cv" class="btn btn-info">
+            <i class="bi bi-file-earmark-person"></i> Ver mi CV
+        </a>
     </div>
-<!--@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");-->
+
+    <div class="container"> 
+        <br>
+        <h1 class="animate__animated animate__rubberBand text-center">
+            MR_WEATHER
+        </h1>
+
+        <!-- Formulario para ingresar la ciudad -->
+        <form method="post" class="text-center">
+            <br>
+            <div class="input-group input-group-sm mb-3">
+                <input type="text" class="form-control" placeholder="País, Estado, Ciudad a consultar:" name="txtCiudad" id="txtCiudad">
+            </div>
+            <button type="submit" class="btn btn-secondary">
+                <i class="bi bi-snow2"></i> Consultar
+            </button>
+        </form>
+
+        <!-- Mostrar información del clima -->
+        {% if cod == 200 %}
+            <div class="mt-4">
+                <h2>Clima en {{ ciudad }}</h2>
+                <p><strong>Humedad:</strong> {{ humedad }}%</p>
+                <p><strong>Presión:</strong> {{ presion }} hPa</p>
+                <p><strong>Descripción:</strong> {{ descripcion }}</p>
+                <p><strong>Longitud:</strong> {{ longitud }}</p>
+                <p><strong>Latitud:</strong> {{ latitud }}</p>
+                <img src="http://openweathermap.org/img/wn/{{ icon }}@2x.png" alt="Ícono del clima">
+            </div>
+        {% elif cod %}
+            <div class="mt-4 alert alert-danger">
+                <p>No se encontró información para la ciudad ingresada.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <footer class="bg-info text-center text-lg-start fixed-bottom">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2024 Copyright:
+            <a class="text-dark">Fatima Zevallos</a>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
